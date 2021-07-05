@@ -1,0 +1,34 @@
+import React, { useState, useEffect } from 'react'
+
+
+
+const ThemeChanger = () => {
+
+    type element = {
+        getElement: string;
+    }
+
+    const [themeState, setThemeState] = useState(false);
+  
+    const handleChange = () => {
+      setThemeState(!themeState);
+      if (themeState) {
+        localStorage.setItem('Theme', 'dark');
+
+      } else {
+        localStorage.setItem('Theme', 'light');
+        document.body.classList.remove('dark-theme');
+      }
+    }
+    useEffect(() => {
+      const getTheme = localStorage.getItem('Theme');
+      if (getTheme === 'dark') return  document.body.classList.add('dark-mode');
+    })
+    return (
+      <div>
+        <button onClick={handleChange}>{themeState ? 'Light Mode' : 'Dark Mode'}</button>
+      </div>
+    )
+  }
+  
+  export default ThemeChanger;
